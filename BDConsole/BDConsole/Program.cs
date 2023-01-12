@@ -11,18 +11,19 @@ namespace BDConsole
 
             Console.WriteLine("Добро пожаловать в БД!");
             Console.WriteLine("Управление БД: \n1 - Добавть запись \n2 - Изменить запись \n3 - Удалить запись \n4 - Просмотр БД \n5 - Очистка БД");
-
-
+            bool idNum;
+            string id;
+            PersonService personservice = new PersonService();
             while (true)
             {
-                PersonService personservice = new PersonService();
+
                 Console.WriteLine("Введите команду:");
 
-                int comNum = int.Parse(Console.ReadLine());
-                bool idNum;
-                string id;
+                idNum = int.TryParse(Console.ReadLine(), out int idNum1);
 
-                switch (comNum)
+
+                
+                switch (idNum1)
                 {
                     case 1:                    
                         Console.WriteLine("Введите имя человека:");
@@ -30,6 +31,7 @@ namespace BDConsole
                         Console.WriteLine("Введите возраст человека:");
                         int age = int.Parse(Console.ReadLine());
                         personservice.AddPerson(name, age);
+                        Console.WriteLine("Пользователь добавлен!");
                         break;
 
                     case 2:
@@ -43,10 +45,11 @@ namespace BDConsole
                         if (idNum == true)
                         {
                             personservice.ChangePerson(changeId, newName, newAge);
+                            Console.WriteLine("Пользователь измене!");
                         }
                         else
                         {
-                            Console.WriteLine("Неверно указаны данные");
+                            Console.WriteLine("Неверно указаны данные ID");
                         }
                         break;
 
@@ -57,10 +60,11 @@ namespace BDConsole
                         if (idNum==true)
                         {
                             personservice.DelPerson(delId);
+                            Console.WriteLine("Пользователь удален");
                         }
                         else
                         {
-                            Console.WriteLine("Неверно указаны данные");
+                            Console.WriteLine("Неверно указаны данные ID");
                         }
 
                         break;

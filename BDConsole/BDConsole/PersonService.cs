@@ -6,9 +6,9 @@ namespace BDConsole
 {
     public class PersonService
     {
-        public Person AddPerson(string name, int age)
+        public void AddPerson(string name, int age)
         {
-            using (var context = new DbCContext())
+            using (var context = new BDContext())
             {
 
 
@@ -19,14 +19,12 @@ namespace BDConsole
                 };
                 context.Persons.Add(person);
                 context.SaveChanges();
-                return person;
-
             }
         }
 
-        public Person ChangePerson(int? idNum, string newName, int newAge)
+        public void ChangePerson(int? idNum, string newName, int newAge)
         {
-            using (var db = new DbCContext())
+            using (var db = new BDContext())
             {
                 var person = db.Persons.FirstOrDefault(y => y.ID == idNum);
                 if (person != null)
@@ -34,48 +32,40 @@ namespace BDConsole
                     person.Name = newName;
                     person.Age = newAge;
                     db.SaveChanges();
-                    return person;
                 }
-                else
-                {
-                    return null;
-                }
+
             }
         }
 
-        public Person DelPerson(int? idNum)
+        public void DelPerson(int? idNum)
         {
-            using (var db = new DbCContext())
+            using (var db = new BDContext())
             {
                 var person = db.Persons.FirstOrDefault(u => u.ID == idNum);
                 if (person != null)
                 {
                     db.Persons.Remove(person);
                     db.SaveChanges();
-                }
-                return null;
-                
+                }              
 
             }
         }
 
         public List<Person> ShowPerson()
         {
-            using (var context = new DbCContext())
+            using (var context = new BDContext())
             {
                 var persons = context.Persons.ToList();
                 return persons;
             }
         }
 
-        public Person DeleteAll()
+        public void DeleteAll()
         {
-            using (var db = new DbCContext())
+            using (var db = new BDContext())
             {
                 db.Persons.RemoveRange(db.Persons);
                 db.SaveChanges();
-                return null;
-
             }
 
         }

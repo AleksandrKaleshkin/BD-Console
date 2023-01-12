@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbCContext.cs" />
+    <Compile Include="BDContext.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonService.cs" />
     <Compile Include="Program.cs" />

@@ -3,9 +3,9 @@ using System.Data.Entity;
 
 namespace BDConsole
 {
-    public class DbCContext: DbContext
+    public class BDContext: DbContext
     {
-        public DbCContext(): base ("DBConnectionString")
+        public BDContext(): base ("DBConnectionString")
         {
 
         }
