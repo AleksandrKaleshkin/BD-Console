@@ -45,7 +45,7 @@ namespace BDConsole
                         if (idNum == true)
                         {
                             personservice.ChangePerson(changeId, newName, newAge);
-                            Console.WriteLine("Пользователь измене!");
+                            Console.WriteLine("Пользователь изменен!");
                         }
                         else
                         {
@@ -71,9 +71,16 @@ namespace BDConsole
 
                     case 4:
                         var persons =personservice.ShowPerson().ToList();
-                        foreach (var person in persons)
+                        if (persons.Count>0)
                         {
-                            Console.WriteLine($"ID: {person.ID} Имя: {person.Name} Возраст: {person.Age}");
+                            foreach (var person in persons)
+                            {
+                                Console.WriteLine($"ID: {person.ID} Имя: {person.Name} Возраст: {person.Age}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("В БД нет данных!");
                         }
                         break;
 
