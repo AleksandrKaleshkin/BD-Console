@@ -1,14 +1,17 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BDConsole
+namespace ConsoleApp1
 {
-    public class PersonService
+    internal class PersonService
     {
         public void AddPerson(string name, int age)
         {
-            using (var context = new BDContext())
+            using (var context = new ApplicationContext())
             {
 
 
@@ -24,7 +27,7 @@ namespace BDConsole
 
         public void ChangePerson(int? idNum, string newName, int newAge)
         {
-            using (var db = new BDContext())
+            using (var db = new ApplicationContext())
             {
                 var person = db.Persons.FirstOrDefault(y => y.ID == idNum);
                 if (person != null)
@@ -39,21 +42,21 @@ namespace BDConsole
 
         public void DelPerson(int? idNum)
         {
-            using (var db = new BDContext())
+            using (var db = new ApplicationContext())
             {
                 var person = db.Persons.FirstOrDefault(u => u.ID == idNum);
                 if (person != null)
                 {
                     db.Persons.Remove(person);
                     db.SaveChanges();
-                }              
+                }
 
             }
         }
 
         public List<Person> ShowPerson()
         {
-            using (var context = new BDContext())
+            using (var context = new ApplicationContext())
             {
                 var persons = context.Persons.ToList();
                 return persons;
@@ -62,7 +65,7 @@ namespace BDConsole
 
         public void DeleteAll()
         {
-            using (var db = new BDContext())
+            using (var db = new ApplicationContext())
             {
                 db.Persons.RemoveRange(db.Persons);
                 db.SaveChanges();
@@ -71,3 +74,4 @@ namespace BDConsole
         }
     }
 }
+
